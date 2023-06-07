@@ -2,8 +2,6 @@ import 'package:firebasematerial/controller/contact_controller.dart';
 import 'package:firebasematerial/model/contact_model.dart';
 import 'package:firebasematerial/view/contact.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/framework.dart';
-import 'package:flutter/src/widgets/placeholder.dart';
 
 class AddContact extends StatefulWidget {
   AddContact({super.key});
