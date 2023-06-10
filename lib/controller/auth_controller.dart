@@ -9,7 +9,7 @@ class AuthController {
 
   bool get success => false;
 
-  Future<UserModel?> signInWithEmail(String email, String password) async {
+  Future<UserModel?> signInWithEmailAndPassword(String email, String password) async {
     //2 parameter itu adalah keharusan jika menggunakan password
     try {
       final UserCredential userCredential = await auth
