@@ -4,7 +4,7 @@ import 'package:firebasematerial/view/contact.dart';
 import 'package:flutter/material.dart';
 
 class AddContact extends StatefulWidget {
-  AddContact({super.key});
+  const AddContact({super.key});
 
   @override
   State<AddContact> createState() => _AddContactState();
@@ -24,68 +24,98 @@ class _AddContactState extends State<AddContact> {
       appBar: AppBar(
         title: const Text('Add Contact'),
       ),
-      body: Padding(
-        padding: const EdgeInsets.all(10.0),
-        child: Form(
-          key: formKey,
-          child: Column(
-            children: [
-              TextFormField(
-                decoration: const InputDecoration(
-                  hintText: 'Name',
-                ),
-                onChanged: (value) => name = value,
-              ),
-              TextFormField(
-                decoration: const InputDecoration(
-                  hintText: 'Phone',
-                ),
-                onChanged: (value) => phone = value,
-              ),
-              TextFormField(
-                decoration: const InputDecoration(
-                  hintText: 'Email',
-                ),
-                onChanged: (value) => email = value,
-              ),
-              TextFormField(
-                decoration: const InputDecoration(
-                  hintText: 'Address',
-                ),
-                onChanged: (value) => address = value,
-              ),
-              const SizedBox(
-                height: 10,
-              ),
-              ElevatedButton(
-                child: const Text('Add Contact'),
-                onPressed: () async {
-                  if (formKey.currentState!.validate()) {
-                    ContactModel cm = ContactModel(
-                      name: name!, //dari variabel di def. diatas
-                      phone: phone!,
-                      email: email!,
-                      address: address!,
-                    );
-                    contactController.addContact(cm).then((value) {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => const Contact(),
+      body: SafeArea(
+        child: Padding(
+          padding: const EdgeInsets.all(10.0),
+          child: Form(
+            key: formKey,
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Card(
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(10),
+                  ),
+                  elevation: 10,
+                  shadowColor: Colors.black,
+                  child: Padding(
+                    padding: const EdgeInsets.all(20.0),
+                    child: Column(
+                      children: [
+                        const SizedBox(
+                          height: 10,
                         ),
-                      );
-                    });
-                    ScaffoldMessenger.of(context).showSnackBar(
-                      const SnackBar(
-                        content: Text('Contact Added'),
-                        duration: Duration(seconds: 1),
-                        backgroundColor: Colors.green,
-                      ),
-                    );
-                  }
-                },
-              ),
-            ],
+                        const CircleAvatar(
+                          radius: 25,
+                          child: Icon(
+                            Icons.person,
+                            size: 25,
+                          ),
+                        ),
+                        const SizedBox(
+                          height: 10,
+                        ),
+                        TextFormField(
+                          decoration: const InputDecoration(
+                            labelText: 'Name',
+                          ),
+                          onChanged: (value) => name = value,
+                        ),
+                        TextFormField(
+                          decoration: const InputDecoration(
+                            labelText: 'Phone',
+                          ),
+                          onChanged: (value) => phone = value,
+                        ),
+                        TextFormField(
+                          decoration: const InputDecoration(
+                            labelText: 'Email',
+                          ),
+                          onChanged: (value) => email = value,
+                        ),
+                        TextFormField(
+                          decoration: const InputDecoration(
+                            labelText: 'Address',
+                          ),
+                          onChanged: (value) => address = value,
+                        ),
+                        const SizedBox(
+                          height: 20,
+                        ),
+                        ElevatedButton(
+                          child: const Text('Add Contact'),
+                          onPressed: () async {
+                            if (formKey.currentState!.validate()) {
+                              ContactModel cm = ContactModel(
+                                name: name!, //dari variabel di def. diatas
+                                phone: phone!,
+                                email: email!,
+                                address: address!,
+                              );
+                              contactController.addContact(cm).then((value) {
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) => const Contact(),
+                                  ),
+                                );
+                              });
+                              ScaffoldMessenger.of(context).showSnackBar(
+                                const SnackBar(
+                                  content: Text('Contact Added'),
+                                  duration: Duration(seconds: 1),
+                                  backgroundColor: Colors.green,
+                                ),
+                              );
+                            }
+                          },
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+              ],
+            ),
           ),
         ),
       ),
