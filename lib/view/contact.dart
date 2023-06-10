@@ -57,10 +57,6 @@ class _ContactState extends State<Contact> {
                 ],
               ),
             ),
-            //const Text(
-            //'Contact List',
-            //style: TextStyle(fontSize: 25, fontWeight: FontWeight.bold),
-            //),
             Expanded(
               child: StreamBuilder<List<DocumentSnapshot>>(
                 stream: cc.stream,
@@ -70,7 +66,6 @@ class _ContactState extends State<Contact> {
                       child: CircularProgressIndicator(),
                     );
                   }
-                  //harus buat 1 var untuk menampung datanya
                   final List<DocumentSnapshot> data = snapshot.data!;
                   return ListView.builder(
                     itemCount: data.length,
@@ -92,7 +87,7 @@ class _ContactState extends State<Contact> {
                           },
                           child: Card(
                             elevation: 10,
-                            shadowColor: Colors.purple,
+                            shadowColor: Colors.cyan,
                             child: ListTile(
                               leading: CircleAvatar(
                                   backgroundColor: Colors.pink,
@@ -167,7 +162,7 @@ class _ContactState extends State<Contact> {
           Navigator.push(
             context,
             MaterialPageRoute(
-              builder: (context) => AddContact(),
+              builder: (context) => const AddContact(),
             ),
           );
         },
