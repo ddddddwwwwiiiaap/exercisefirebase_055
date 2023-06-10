@@ -24,97 +24,106 @@ class _AddContactState extends State<AddContact> {
       appBar: AppBar(
         title: const Text('Add Contact'),
       ),
-      body: SafeArea(
-        child: Padding(
-          padding: const EdgeInsets.all(10.0),
-          child: Form(
-            key: formKey,
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Card(
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(10),
-                  ),
-                  elevation: 10,
-                  shadowColor: Colors.black,
-                  child: Padding(
-                    padding: const EdgeInsets.all(20.0),
-                    child: Column(
-                      children: [
-                        const SizedBox(
-                          height: 10,
-                        ),
-                        const CircleAvatar(
-                          radius: 25,
-                          child: Icon(
-                            Icons.person,
-                            size: 25,
+      body: Container(
+        decoration: BoxDecoration(
+          gradient: LinearGradient(
+            begin: Alignment.topCenter,
+            end: Alignment.bottomCenter,
+            colors: [Colors.purple.shade100, Colors.pink.shade300],
+          ),
+        ),
+        child: SafeArea(
+          child: Padding(
+            padding: const EdgeInsets.all(10.0),
+            child: Form(
+              key: formKey,
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Card(
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(10),
+                    ),
+                    elevation: 10,
+                    shadowColor: Colors.black,
+                    child: Padding(
+                      padding: const EdgeInsets.all(20.0),
+                      child: Column(
+                        children: [
+                          const SizedBox(
+                            height: 10,
                           ),
-                        ),
-                        const SizedBox(
-                          height: 10,
-                        ),
-                        TextFormField(
-                          decoration: const InputDecoration(
-                            labelText: 'Name',
+                          const CircleAvatar(
+                            radius: 25,
+                            child: Icon(
+                              Icons.person,
+                              size: 25,
+                            ),
                           ),
-                          onChanged: (value) => name = value,
-                        ),
-                        TextFormField(
-                          decoration: const InputDecoration(
-                            labelText: 'Phone',
+                          const SizedBox(
+                            height: 10,
                           ),
-                          onChanged: (value) => phone = value,
-                        ),
-                        TextFormField(
-                          decoration: const InputDecoration(
-                            labelText: 'Email',
+                          TextFormField(
+                            decoration: const InputDecoration(
+                              labelText: 'Name',
+                            ),
+                            onChanged: (value) => name = value,
                           ),
-                          onChanged: (value) => email = value,
-                        ),
-                        TextFormField(
-                          decoration: const InputDecoration(
-                            labelText: 'Address',
+                          TextFormField(
+                            decoration: const InputDecoration(
+                              labelText: 'Phone',
+                            ),
+                            onChanged: (value) => phone = value,
                           ),
-                          onChanged: (value) => address = value,
-                        ),
-                        const SizedBox(
-                          height: 20,
-                        ),
-                        ElevatedButton(
-                          child: const Text('Add Contact'),
-                          onPressed: () async {
-                            if (formKey.currentState!.validate()) {
-                              ContactModel cm = ContactModel(
-                                name: name!, //dari variabel di def. diatas
-                                phone: phone!,
-                                email: email!,
-                                address: address!,
-                              );
-                              contactController.addContact(cm).then((value) {
-                                Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                    builder: (context) => const Contact(),
+                          TextFormField(
+                            decoration: const InputDecoration(
+                              labelText: 'Email',
+                            ),
+                            onChanged: (value) => email = value,
+                          ),
+                          TextFormField(
+                            decoration: const InputDecoration(
+                              labelText: 'Address',
+                            ),
+                            onChanged: (value) => address = value,
+                          ),
+                          const SizedBox(
+                            height: 20,
+                          ),
+                          ElevatedButton(
+                            child: const Text('Add Contact'),
+                            onPressed: () async {
+                              if (formKey.currentState!.validate()) {
+                                ContactModel cm = ContactModel(
+                                  name: name!, //dari variabel di def. diatas
+                                  phone: phone!,
+                                  email: email!,
+                                  address: address!,
+                                );
+                                contactController.addContact(cm).then((value) {
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                      builder: (context) => const Contact(),
+                                    ),
+                                  );
+                                });
+                                ScaffoldMessenger.of(context).showSnackBar(
+                                  const SnackBar(
+                                    content: Text('Contact Added'),
+                                    duration: Duration(seconds: 1),
+                                    backgroundColor: Colors.green,
                                   ),
                                 );
-                              });
-                              ScaffoldMessenger.of(context).showSnackBar(
-                                const SnackBar(
-                                  content: Text('Contact Added'),
-                                  duration: Duration(seconds: 1),
-                                  backgroundColor: Colors.green,
-                                ),
-                              );
-                            }
-                          },
-                        ),
-                      ],
+                              }
+                            },
+                          ),
+                        ],
+                      ),
                     ),
                   ),
-                ),
-              ],
+                ],
+              ),
             ),
           ),
         ),
