@@ -169,7 +169,7 @@ class _RegisterState extends State<Register> {
                                         context,
                                         MaterialPageRoute(
                                           builder: (context) {
-                                            return const Contact();
+                                            return const Login();
                                           },
                                         ),
                                       );
