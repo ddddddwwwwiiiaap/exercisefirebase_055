@@ -50,7 +50,7 @@ class _LoginState extends State<Login> {
                     ),
                   ),
                   const SizedBox(
-                    height: 100,
+                    height: 80,
                   ),
                   TextFormField(
                     decoration: InputDecoration(

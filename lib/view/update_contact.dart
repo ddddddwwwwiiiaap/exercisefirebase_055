@@ -29,6 +29,7 @@ class _UpdateContactState extends State<UpdateContact> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      resizeToAvoidBottomInset: false,
       appBar: AppBar(
         title: const Text('Update Contact'),
       ),
@@ -46,7 +47,7 @@ class _UpdateContactState extends State<UpdateContact> {
             child: Form(
               key: formKey,
               child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
+                //mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Card(
                     shape: RoundedRectangleBorder(
@@ -78,6 +79,12 @@ class _UpdateContactState extends State<UpdateContact> {
                             decoration: const InputDecoration(
                               labelText: 'Name',
                             ),
+                            validator:(value) {
+                              if (value!.isEmpty) {
+                                return 'Please enter name';
+                              }
+                              return null;
+                            },
                             onChanged: (value) => name = value,
                           ),
                           TextFormField(
@@ -87,6 +94,12 @@ class _UpdateContactState extends State<UpdateContact> {
                             decoration: const InputDecoration(
                               labelText: 'Phone',
                             ),
+                            validator:(value) {
+                              if (value!.isEmpty) {
+                                return 'Please enter phone number';
+                              }
+                              return null;
+                            },
                             onChanged: (value) => phone = value,
                           ),
                           TextFormField(
@@ -96,6 +109,12 @@ class _UpdateContactState extends State<UpdateContact> {
                             decoration: const InputDecoration(
                               labelText: 'Email',
                             ),
+                            validator:(value) {
+                              if (value!.isEmpty) {
+                                return 'Please enter email';
+                              }
+                              return null;
+                            },
                             onChanged: (value) => email = value,
                           ),
                           TextFormField(
@@ -105,6 +124,12 @@ class _UpdateContactState extends State<UpdateContact> {
                             decoration: const InputDecoration(
                               labelText: 'Address',
                             ),
+                            validator:(value) {
+                              if (value!.isEmpty) {
+                                return 'Please enter address';
+                              }
+                              return null;
+                            },
                             onChanged: (value) => address = value,
                           ),
                           const SizedBox(
