@@ -32,80 +32,110 @@ class _UpdateContactState extends State<UpdateContact> {
       appBar: AppBar(
         title: const Text('Update Contact'),
       ),
-      body: Padding(
-        padding: const EdgeInsets.all(10.0),
-        child: Form(
-          key: formKey,
-          child: Column(
-            children: [
-              TextFormField(
-                controller: TextEditingController(
-                  text: widget.contactModel.name,
+      body: SafeArea(
+        child: Padding(
+          padding: const EdgeInsets.all(10.0),
+          child: Form(
+            key: formKey,
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Card(
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(10),
+                  ),
+                  elevation: 10,
+                  shadowColor: Colors.black,
+                  child: Padding(
+                    padding: const EdgeInsets.all(20.0),
+                    child: Column(
+                      children: [
+                        const SizedBox(
+                          height: 10,
+                        ),
+                        const CircleAvatar(
+                          radius: 25,
+                          child: Icon(
+                            Icons.person,
+                            size: 25,
+                          ),
+                        ),
+                        const SizedBox(
+                          height: 10,
+                        ),
+                        TextFormField(
+                          controller: TextEditingController(
+                            text: widget.contactModel.name,
+                          ),
+                          decoration: const InputDecoration(
+                            labelText: 'Name',
+                          ),
+                          onChanged: (value) => name = value,
+                        ),
+                        TextFormField(
+                          controller: TextEditingController(
+                            text: widget.contactModel.phone,
+                          ),
+                          decoration: const InputDecoration(
+                            labelText: 'Phone',
+                          ),
+                          onChanged: (value) => phone = value,
+                        ),
+                        TextFormField(
+                          controller: TextEditingController(
+                            text: widget.contactModel.email,
+                          ),
+                          decoration: const InputDecoration(
+                            labelText: 'Email',
+                          ),
+                          onChanged: (value) => email = value,
+                        ),
+                        TextFormField(
+                          controller: TextEditingController(
+                            text: widget.contactModel.address,
+                          ),
+                          decoration: const InputDecoration(
+                            labelText: 'Address',
+                          ),
+                          onChanged: (value) => address = value,
+                        ),
+                        const SizedBox(
+                          height: 20,
+                        ),
+                        ElevatedButton(
+                          child: const Text('Update Contact'),
+                          onPressed: () {
+                            if (formKey.currentState!.validate()) {
+                              ContactModel cm = ContactModel(
+                                id: widget.contactModel.id,
+                                name: name ?? widget.contactModel.name,
+                                phone: phone ?? widget.contactModel.phone,
+                                email: email ?? widget.contactModel.email,
+                                address: address ?? widget.contactModel.address,
+                              );
+                              contactController.updateContact(cm);
+                              ScaffoldMessenger.of(context).showSnackBar(
+                                const SnackBar(
+                                  content: Text('Contact Updated'),
+                                  duration: Duration(seconds: 1),
+                                  backgroundColor: Colors.green,
+                                ),
+                              );
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => const Contact(),
+                                ),
+                              );
+                            }
+                          },
+                        ),
+                      ],
+                    ),
+                  ),
                 ),
-                decoration: const InputDecoration(
-                  hintText: 'Name',
-                ),
-                onChanged: (value) => name = value,
-              ),
-              TextFormField(
-                controller: TextEditingController(
-                  text: widget.contactModel.phone,
-                ),
-                decoration: const InputDecoration(
-                  hintText: 'Phone',
-                ),
-                onChanged: (value) => phone = value,
-              ),
-              TextFormField(
-                controller: TextEditingController(
-                  text: widget.contactModel.email,
-                ),
-                decoration: const InputDecoration(
-                  hintText: 'Email',
-                ),
-                onChanged: (value) => email = value,
-              ),
-              TextFormField(
-                controller: TextEditingController(
-                  text: widget.contactModel.address,
-                ),
-                decoration: const InputDecoration(
-                  hintText: 'Address',
-                ),
-                onChanged: (value) => address = value,
-              ),
-              const SizedBox(
-                height: 10,
-              ),
-              ElevatedButton(
-                child: const Text('Update Contact'),
-                onPressed: () {
-                  if (formKey.currentState!.validate()) {
-                    ContactModel cm = ContactModel(
-                      id: widget.contactModel.id,
-                      name: name ?? widget.contactModel.name,
-                      phone: phone ?? widget.contactModel.phone,
-                      email: email ?? widget.contactModel.email,
-                      address: address ?? widget.contactModel.address,
-                    );
-                    contactController.updateContact(cm);
-                    ScaffoldMessenger.of(context).showSnackBar(
-                      const SnackBar(
-                        content: Text('Contact Updated'),
-                        duration: Duration(seconds: 1),
-                        backgroundColor: Colors.green,
-                      ),
-                    );
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => const Contact(),
-                      ),
-                    );
-                  }
-                },
-              ),
-            ],
+              ],
+            ),
           ),
         ),
       ),
